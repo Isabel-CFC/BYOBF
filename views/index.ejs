@@ -1,0 +1,52 @@
+<%- include("partials/header.ejs") %>
+
+<section id="index-header">
+    <p id="insp-quote"><%= quote %></p>
+</section>
+
+<section id="post-creation">
+    <div id="intro-text">
+        <h1>Be your own<br>best friend</h1>
+        <h2 class="intro-line">No one else can tell you your worth.<br>You have yourself for life.</h2>
+    </div>
+    <div id="intro-form">    
+        <form id="post-form" action="/posts" method="POST">
+            <label class="label-text" for="category">What are you feeling good about today?</label><br>
+            <input class="input-box form1" type="text" name="category" size="55" style="height: 50px" maxlength="25" placeholder="My career, My looks, My friends..." required><br>
+            <label class="label-text" for="compliment">Care to expand a bit on that?</label><br>
+            <input class="input-box form1" type="text" name="compliment" size="55" style="height: 50px" maxlength="50" placeholder="I'm crushing it! What more can I say?" required><br>
+            <input class="post-button button" type="submit" value="Share it!">
+        </form>
+    </div>
+</section>
+
+<section id="blog-container">
+    <div id="blogpost-container">
+        <% if(locals.posts) { %>
+            <% for(let i=0; i<posts.length; i++) { %>
+                <div class="blog-post">
+                    <div class="post-content">
+                        <h2 class="post-category"><%= posts[i].category %></h2>
+                        <p class="post-text"><%= posts[i].compliment %></p>
+                    </div>
+                    <div class="editbutton-container">
+                        <form class="edit-form" action="/edit" method="POST">
+                            <input type="hidden" name="postIndex" value="<%= i %>">
+                            <button class="edit-button button" type="submit">Edit</button>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+        <% } else { %>
+            <div class="no-posts">
+                <h2 class="no-posts text">Nothing here yet...</h2>
+            </div>
+        <% } if(locals.posts && posts.length === 0) { %>
+            <div class="no-posts">
+                <h2 class="no-posts text">Nothing here yet...</h2>
+            </div>
+        <% } %>
+    </div>
+</section>
+
+<%- include("partials/footer.ejs") %>

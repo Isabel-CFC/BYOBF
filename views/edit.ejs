@@ -1,0 +1,23 @@
+<%- include("partials/header.ejs") %>
+
+<section id="post-edition">
+    <div id="edit-container">
+        <div id="edit-container-text">
+            <h2 id="edit-text">Update <br>your entry:</h2>
+        </div>
+        <div id="edit-container-form">
+            <form id="update-form" action="/updated" method="POST">
+                <label class="label-text" for="updatedCategory">What are you feeling good about today?</label><br>
+                <input class="input-box" type="text" name="updatedCategory" size="55" style="height: 50px" maxlength="25" value="<%= postToUpdate.category %>"><br>
+                <label class="label-text" for="updatedCompliment">Care to expand a bit on that?</label><br>
+                <input class="input-box" type="text" name="updatedCompliment" size="55" style="height: 50px" maxlength="50" value="<%= postToUpdate.compliment %>"><br>
+                <input type="hidden" name="updatedPostIndex" value="<%= pIndex %>">
+                <input class="update-buttons button" type="submit" name="updateButton" value="Update">
+                <input class="update-buttons delete button" type="submit" name="deleteButton" value="Delete">
+                <button class="go-back button" onclick="history.back()">Go Back</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<%- include("partials/footer.ejs") %>
